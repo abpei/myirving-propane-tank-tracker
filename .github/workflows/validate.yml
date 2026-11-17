@@ -9,6 +9,41 @@ on:
   workflow_dispatch:
 
 jobs:
+  compile:
+    # Syntax gate: a module that does not parse can never be imported by Home
+    # Assistant. The parser-only pytest suite imports parser.py through a package
+    # shell, so it cannot catch a broken coordinator, config_flow or sensor module.
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # 3.13 rejects syntax that the 3.14 runtime accepts only through PEP 758
+        # (unparenthesised multiple exception types), so the gate covers both.
+        python-version: ["3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Compile every module
+        run: python -m compileall -q custom_components tests
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+      - name: Install lint dependencies
+        run: python -m pip install -r requirements-test.txt
+      - name: Ruff check
+        run: python -m ruff check custom_components tests
+      - name: Ruff format check
+        run: python -m ruff format --check custom_components tests
+
   validate-hacs:
     runs-on: ubuntu-latest
     steps:
@@ -17,6 +52,11 @@ jobs:
         uses: hacs/action@main
         with:
           category: integration
+          # brands: myirving_propane is not in home-assistant/brands yet, and that
+          # check only passes for domains listed there (a PR to another repository).
+          # Every other check runs, including description, topics, hacs.json,
+          # manifest, license, issues and information.
+          ignore: brands
 
   validate-hassfest:
     runs-on: ubuntu-latest
@@ -24,3 +64,16 @@ jobs:
       - uses: actions/checkout@v4
       - name: Hassfest validation
         uses: home-assistant/actions/hassfest@master
+
+  pytest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+      - name: Install test dependencies
+        run: python -m pip install -r requirements-test.txt
+      - name: Run parser tests
+        run: python -m pytest

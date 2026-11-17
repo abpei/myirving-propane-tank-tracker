@@ -1,0 +1,63 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "MyIrving Propane Tank",
+        "description": "Enter the email address and password you use to sign in at myaccount.irvingenergy.com.",
+        "data": {
+          "username": "Email address",
+          "password": "Password",
+          "scan_interval": "Polling interval (hours)"
+        },
+        "data_description": {
+          "scan_interval": "How often to check the portal for new tank readings. Tank readings usually arrive every day or two."
+        }
+      },
+      "reauth_confirm": {
+        "title": "Reauthenticate MyIrving Propane Tank",
+        "description": "The Irving Energy portal rejected the stored password for {username}. Enter the current password for this account.",
+        "data": {
+          "password": "Password"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "The portal rejected this email address or password, or the account requires multi-factor authentication, which is not supported.",
+      "cannot_connect": "Unable to reach the Irving Energy account portal. Try again later.",
+      "unknown": "Unexpected error while talking to the portal."
+    },
+    "abort": {
+      "already_configured": "This Irving Energy account is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "MyIrving Propane Tank options",
+        "description": "Credentials are stored with the integration. To change them, remove and re-add the integration.",
+        "data": {
+          "scan_interval": "Polling interval (hours)"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "tank_percent": {
+        "name": "Tank level"
+      },
+      "last_reading": {
+        "name": "Last reading"
+      },
+      "last_delivery_date": {
+        "name": "Last delivery date"
+      },
+      "last_delivery_litres": {
+        "name": "Last delivery volume"
+      },
+      "todays_price": {
+        "name": "Today's price"
+      }
+    }
+  }
+}

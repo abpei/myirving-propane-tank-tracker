@@ -10,6 +10,11 @@ venv/
 htmlcov/
 .pytest_cache/
 
+# Raw portal captures may contain real account data and must never be
+# committed. Scrub a copy into tests/fixtures/ before adding it to git.
+tests/fixtures/raw/
+*.unscrubbed.html
+
 # Agent/tooling files, not project content
 AGENTS.md
 IMPLEMENTATION_PLAN.md

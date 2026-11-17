@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<!--
+  Scrubbed /user-home fixture for the MyIrving Propane Tank Tracker parser tests.
+
+  Structure and values come from the verified 2026-11-17 scrape of the portal's
+  /user-home page. Every account identifier
+  (customer name, service address, email, account number, phone, tank serial)
+  has been replaced with an obvious placeholder.
+
+  NEVER paste a real portal page here. Drop unscrubbed captures in
+  tests/fixtures/raw/ (gitignored) and scrub them before promoting a copy to
+  this file. See tests/README.md for the scrub checklist.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Account | Irving Energy</title>
+  <link rel="stylesheet" href="/assets/css/app.css">
+</head>
+<body class="user-home">
+  <header class="site-header">
+    <a class="brand" href="/user-home">Irving Energy</a>
+    <nav class="site-nav">
+      <ul>
+        <li><a href="/user-home" class="active">My Account</a></li>
+        <li><a href="/delivery-history">Delivery History</a></li>
+        <li><a href="/billing">Billing</a></li>
+        <li><a href="/logout">Sign Out</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="account-header">
+      <h1>Welcome back, Jane Doe</h1>
+      <p class="account-meta">
+        Account #: 0000000 &middot;
+        Email: jane.doe@example.com &middot;
+        Phone: (000) 000-0000
+      </p>
+      <p class="service-address">
+        123 Example Street<br>
+        Exampleville, NS A1A 1A1
+      </p>
+    </section>
+
+    <section class="tank-card">
+      <h2>Your Propane Tank</h2>
+      <div class="tank-gauge">
+        <div id="tank_gauge_summary" class="text-center">Percent in tank: 61% <br>Last Reading: 11/15/2026</div>
+      </div>
+      <p class="tank-serial">Tank serial: TANK-0000000</p>
+    </section>
+
+    <section class="account-summary">
+      <h2>Account Summary</h2>
+      <!-- Live layout: a bootstrap header row of th cells with data-field
+           attributes, then one bare td data row in the same column order. -->
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th data-field="Product Name">Product Name</th>
+            <th data-field="Delivery Prov/State">Delivery Prov/State</th>
+            <th data-field="Last Delivery Date">Last Delivery Date</th>
+            <th data-field="Last Delivery Litres">Last Delivery Litres</th>
+            <th data-field="Today&rsquo;s Price">Today&rsquo;s Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>EC Propane</td>
+            <td>PE</td>
+            <td>04/12/2026 4:00am</td>
+            <td>442.00</td>
+            <td>$0.99</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="delivery-history">
+      <h2>Recent Deliveries</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Product</th>
+            <th>Litres</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>04/12/2026</td>
+            <td>EC Propane</td>
+            <td>442.00</td>
+            <td>$437.58</td>
+          </tr>
+          <tr>
+            <td>02/18/2026</td>
+            <td>EC Propane</td>
+            <td>318.50</td>
+            <td>$309.26</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Irving Energy. All rights reserved.</p>
+    <p>Questions? Call (000) 000-0000 or email support@example.com.</p>
+  </footer>
+</body>
+</html>

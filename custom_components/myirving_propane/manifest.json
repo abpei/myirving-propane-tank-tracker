@@ -1,0 +1,11 @@
+{
+  "domain": "myirving_propane",
+  "name": "MyIrving Propane Tank Tracker",
+  "codeowners": ["@abpei"],
+  "config_flow": true,
+  "documentation": "https://github.com/abpei/myirving-propane-tank-tracker",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/abpei/myirving-propane-tank-tracker/issues",
+  "requirements": ["beautifulsoup4>=4.15.0"],
+  "version": "0.1.0"
+}

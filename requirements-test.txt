@@ -1,0 +1,4 @@
+beautifulsoup4>=4.15.0
+pytest>=8.0
+# Pinned so the CI lint gate behaves identically to the local venv.
+ruff==0.17.5

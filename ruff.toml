@@ -1,0 +1,26 @@
+# Ruff configuration shared by the local venv and the CI lint job.
+# Pinned via requirements-test.txt so `ruff check` is reproducible.
+required-version = ">=0.17.3"
+
+# Kept at 3.13 on purpose: 3.14 accepts unparenthesised multiple exception
+# types (PEP 758), and formatting against 3.14 would strip the parentheses from
+# `except (TypeError, ValueError):`, reintroducing syntax that 3.13 rejects.
+target-version = "py313"
+line-length = 88
+
+[lint]
+select = [
+  "E4", # pycodestyle: imports
+  "E7", # pycodestyle: statements
+  "E9", # pycodestyle: runtime errors
+  "F",  # pyflakes
+  "I",  # isort
+]
+
+[lint.isort]
+# Match Home Assistant core's import style: `import x` and `from x import y`
+# are sorted together inside a section instead of in two separate blocks.
+force-sort-within-sections = true
+known-first-party = ["homeassistant", "custom_components"]
+combine-as-imports = true
+split-on-trailing-comma = false
